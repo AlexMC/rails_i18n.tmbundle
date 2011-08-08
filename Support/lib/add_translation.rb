@@ -32,6 +32,7 @@ class AddTranslation
     @path = ENV['TM_FILEPATH']
     @line = ENV['TM_CURRENT_LINE']
     path_parts = @path.split(/\//)
+    path_parts.delete("views")
     path_parts[-1] = path_parts.last.split('.').shift.gsub(/_controller|_helper/,'')
     @path_parts = []
     @path_parts.unshift(path_parts.pop) until path_parts.last == 'app'
@@ -53,7 +54,7 @@ class AddTranslation
     
     variable_str = (variables.size > 0) ? (', ' + variables.join(', ')) : ''
     
-    print "t(:#{@token_key}#{variable_str})"
+    print "<%=t('.#{@token_key}#{variable_str}')%>"
   end
   
   # Ask the user for the token they want to use for this key
