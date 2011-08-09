@@ -34,6 +34,7 @@ class AddTranslation
     path_parts = @path.split(/\//)
     path_parts.delete("views")
     path_parts[-1] = path_parts.last.split('.').shift.gsub(/_controller|_helper/,'')
+    path_parts[-1].gsub!(/\A[\d_\W]/, '')
     @path_parts = []
     @path_parts.unshift(path_parts.pop) until path_parts.last == 'app'
     
